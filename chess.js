@@ -1,4 +1,19 @@
 "use strict";
+var PieceType;
+(function (PieceType) {
+    PieceType[PieceType["Pawn"] = 0] = "Pawn";
+    PieceType[PieceType["Rook"] = 1] = "Rook";
+    PieceType[PieceType["Knight"] = 2] = "Knight";
+    PieceType[PieceType["Bishop"] = 3] = "Bishop";
+    PieceType[PieceType["King"] = 4] = "King";
+    PieceType[PieceType["Queen"] = 5] = "Queen";
+})(PieceType || (PieceType = {}));
+var Color;
+(function (Color) {
+    Color[Color["White"] = 0] = "White";
+    Color[Color["Black"] = 1] = "Black";
+})(Color || (Color = {}));
+;
 // const board: Cell[] = Array.from(["abcdefgh"], (letter) => ({
 //     row: letter
 // })); this creates a a value where its equal to abcdefgh [ { row: 'abcdefgh' } ]
@@ -6,6 +21,9 @@ const board = Array.from("abcdefgh", (letter) => Array.from({ length: 8 }, (_, c
     row: letter,
     col: colLen + 1
 })));
+/** Initialize board */
+function initializeBoard() {
+}
 /** Displaying board */
 function isOdd(n) {
     if ((n & 1) == 0) {
@@ -61,6 +79,7 @@ function cellDisplay(isWhite, w, h, piece) {
     disp += `${cellTopBottomDisplay('-', ' ', w)}`;
     return disp;
 }
+/** Print Statements */
 console.log(board);
 // Testing
 //console.log(cellDisplay(false,9,5,'P'));

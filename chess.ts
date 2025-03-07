@@ -7,6 +7,8 @@ enum PieceType {
     Queen
 }
 
+type PromotionPiece = PieceType.Rook | PieceType.Knight | PieceType.Bishop | PieceType.Queen;
+
 enum Color {
     White,
     Black
@@ -18,9 +20,40 @@ interface Cell {
 }
 
 interface Piece {
+    type: PieceType;
     position: string;
+    color: Color;
+    hasMoved?: boolean;
 }
 
+interface NormalMove {
+    piece: Piece;
+    from: string;
+    to: string; 
+    //capturedPiece?: Piece;
+    //promotion?: PieceType;
+}
+
+interface CaptureMove extends NormalMove{
+    capturedPiece: Piece
+}
+
+interface CastlingMove extends NormalMove{
+    kingSide: boolean;
+    rookFrom: string;
+    rookTo: string;
+};
+
+interface PromotionMove extends NormalMove{
+    promotedTo: PromotionPiece
+}
+
+interface EnPassantMove extends NormalMove{
+    capturePawn: string;
+}
+
+// Discriminatory Union of all move types
+type move = NormalMove | CaptureMove | CastlingMove | PromotionMove | EnPassantMove
 
 
 // const board: Cell[] = Array.from(["abcdefgh"], (letter) => ({
@@ -34,6 +67,11 @@ const board: Cell[][] = Array.from("abcdefgh", (letter) =>
     }))
 )
 
+/** Initialize board */
+
+function initializeBoard() {
+
+}
 
 
 /** Displaying board */
@@ -95,6 +133,12 @@ function cellDisplay(isWhite: boolean, w:number, h:number, piece: string):string
     
     return disp;
 }
+
+function displayBoard() {
+    
+}
+
+/** Print Statements */
 
 console.log(board);
 // Testing
