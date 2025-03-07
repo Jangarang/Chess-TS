@@ -1,61 +1,10 @@
-enum PieceType {
-    Pawn,
-    Rook,
-    Knight,
-    Bishop,
-    King,
-    Queen
-}
-
-type PromotionPiece = PieceType.Rook | PieceType.Knight | PieceType.Bishop | PieceType.Queen;
-
-enum Color {
-    White,
-    Black
-}
+import {PieceType, Color, Piece} from "./piece.js"
 
 interface Cell {
     row: number;
     col: string;
     piece: Piece| null;
 }
-
-interface Piece {
-    type: PieceType;
-    position: string;
-    color: Color;
-    hasMoved?: boolean;
-}
-
-interface NormalMove {
-    piece: Piece;
-    from: string;
-    to: string; 
-    //capturedPiece?: Piece;
-    //promotion?: PieceType;
-}
-
-interface CaptureMove extends NormalMove{
-    capturedPiece: Piece
-}
-
-interface CastlingMove extends NormalMove{
-    kingSide: boolean;
-    rookFrom: string;
-    rookTo: string;
-};
-
-interface PromotionMove extends NormalMove{
-    promotedTo: PromotionPiece
-}
-
-interface EnPassantMove extends NormalMove{
-    capturePawn: string;
-}
-
-// Discriminatory Union of all move types
-type move = NormalMove | CaptureMove | CastlingMove | PromotionMove | EnPassantMove
-
 
 // const board: Cell[] = Array.from(["abcdefgh"], (letter) => ({
 //     row: letter
@@ -117,16 +66,12 @@ function initializePieces(type: PieceType, col: number, row: string, color: Colo
         color: Color.White,
         hasMoved: false
     } 
-    board
+    board[col]
 };
-
-
-
 
 function initializeBoard() {
 
 }
-
 
 /** Displaying board */
 
