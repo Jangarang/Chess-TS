@@ -5,9 +5,9 @@ export interface Cell {
     piece: Piece| null;
 }
 
-const board: {[key: number]: {[key: string]: Cell}} = Object.fromEntries(
+export const board: {[key: number]: {[key: string]: Cell}} = Object.fromEntries(
     Array.from({length: 8}, (_,row) => [
-        row,
+        row+1,
         Object.fromEntries(
             Array.from('abcedfgh', (col) => [ //Why is the index of the character string being passed rather tha nthe character itself
                 col,
@@ -17,57 +17,89 @@ const board: {[key: number]: {[key: string]: Cell}} = Object.fromEntries(
     ])
 );
 
+ function initializePawns(){
+    Object.entries(board[2]).map(([key,value]) => {
+        (   
+            [key, value.piece = {
+            type: PieceType.Pawn,
+            position: value.position,
+            color: Color.White,
+            hasMoved: false,
+            },
+            {...value}
+            ] // because this creates an array of [ , , ] of three values. The third array gets a new copy of value after mutation
+        [2])
+    });
 
+    Object.entries(board[7]).map(([key,value]) => {
+    (   
+        [key, value.piece = {
+        type: PieceType.Pawn,
+        position: value.position,
+        color: Color.Black,
+        hasMoved: false,
+        },
+        {...value}
+        ] // because this creates an array of [ , , ] of three values. The third array gets a new copy of value after mutation
+    [2])
+    });
+}
 
-/** Initialize board */
-// function initializePawns(){
+function initializeQueens(){
+    board[1]['d'].piece = initializePiece(
+        PieceType.Queen,
+        1,
+        'd',
+        Color.White
+    );
 
-   
-//             //console.log(item);
-//             // let pawn: Piece;
-//             // pawn = {
-//             //     type: PieceType.Pawn,
-//             //     position: item.row + item.col,
-//             // } 
+    board[8]['d'].piece = initializePiece(
+        PieceType.Queen,
+        1,
+        'd',
+        Color.Black
+    );
 
-//             for (let i =0; i < 8; i++){
-//                 //board[i][1]
-//                 //let pawn: Piece;
-//                 const white_pawn: Piece  = {
-//                     type: PieceType.Pawn,
-//                     position: board[1][i].row + '2',
-//                     color: Color.White,
-//                     hasMoved: false
-//                 }
-//                 const black_pawn: Piece = {
-//                     type: PieceType.Pawn,
-//                     position: board[6][i].row + '7',
-//                     color: Color.Black,
-//                     hasMoved: false
-//                 }
-//                 board[1][i].piece = white_pawn;
-//                 board[6][i].piece = black_pawn;
-//             }        
-// }
+}
 
-function initializePiece(type: PieceType, col: number, row: string, color: Color){
+function initializeKings(){
+
+}
+
+function initializeKnights(){
+
+}
+
+function initializeBishops(){
+
+}
+
+function initializeRooks(){
+
+}
+
+function initializePiece(type: PieceType, col: number, row: string, color: Color): Piece{
     const newPiece: Piece = {
         type: type,
         position: col + row,
         color: Color.White,
         hasMoved: false
     } 
-    board[col]
+    return newPiece;
 };
 
 function initializePieces(){
-
+   initializePawns();
+   initializeQueens();
 }
 
-export function initializeBoard() {
-
-};
 
 export function displayBoard() {
+    
     console.log(board);
 }
+
+initializePieces();
+
+//console.log(board);
+//console.log(Object.keys(board[1]).length);

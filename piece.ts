@@ -1,10 +1,10 @@
 export enum PieceType {
-    Pawn,
-    Rook,
-    Knight,
-    Bishop,
-    King,
-    Queen
+    Pawn = "P",
+    Rook = "R",
+    Knight = "K",
+    Bishop = "B",
+    King = "K",
+    Queen = "Q" 
 }
 
 export type PromotionPiece = PieceType.Rook | PieceType.Knight | PieceType.Bishop | PieceType.Queen;
