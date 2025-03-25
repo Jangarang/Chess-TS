@@ -16,13 +16,13 @@ import { Piece, PieceType, Color } from "./piece";
 function cellTopBottomDisplay(charac: string, extra: string, w: number):string {
     let disp: string = extra;
     disp += `${charac}`.repeat(w-2);
-    disp += extra;
-    //disp += "\n";
+    disp += "\n";
     return disp;
 }
 
 function cellDisplay(isWhite: boolean, w:number, h:number, piece: string):string {
     let disp: string = cellTopBottomDisplay('_', ' ', w);
+
     if (isWhite){
         for (let i = 1; i < h-1; i++){
             if (i === (Math.floor(h / 2))){
@@ -30,15 +30,16 @@ function cellDisplay(isWhite: boolean, w:number, h:number, piece: string):string
                 disp += '@'.repeat(Math.floor((w / 2)-2));
                 disp += ` ${piece} `;
                 disp += '@'.repeat(Math.floor((w / 2)-2));
-                disp += '|';
+                //disp += '|';
             }else {
                 disp += '|';
                 disp +=  '@'.repeat(w-2);
-                disp += '|';
+                //disp += '|';
             }
             // if (i !== h - 2) {
             //     disp += '\n';
             // }
+            
             disp += '\n';
         }
         
@@ -50,50 +51,93 @@ function cellDisplay(isWhite: boolean, w:number, h:number, piece: string):string
                 disp += ' '.repeat(Math.floor((w / 2)-2));
                 disp += ` ${piece} `;
                 disp += ' '.repeat(Math.floor((w / 2)-2));
-                disp += '|';
+                //disp += '|';
             }else {
                 disp += '|';
                 disp +=  ' '.repeat(w-2);
-                disp += '|';
+                //disp += '|';
             }
             // if (i !== h - 2) {
             //     disp += '\n';
             // }
+            
             disp += '\n';
         }
     }
-    disp += `${cellTopBottomDisplay('-',' ', w)}`;
+    //disp += `${cellTopBottomDisplay('-',' ', w)}`;
     
     return disp;
 }
 
-function rowDisplay(){
-    
-}
 
+function displayBoard() {
+    let boardDisplay: string[] = [];
 
-function displayBoard(){
-    let boardDisplay = ''; // Initialize the full board display
-    for (let row = 1; row < 9; row++){
-         let rowDisplay = ''; // Store the current row's display
+    for (let row = 1; row < 9; row++) {
+        let rowCells = [];
+        
         for (let col = 1; col < 9; col++) {
             let asciCol = String.fromCharCode(96 + col);
-            const pieceColor =  board[row][asciCol].piece?.color;
-          //  console.log(row);
-            //console.log(asciCol);
+            //const pieceColor = board[row][asciCol].piece?.color;
             const pieceType = board[row][asciCol].piece?.type || " ";
-            let color = false; 
-            if (pieceColor == Color.White){
-                color = true;
+            let isWhite = true;
+            if ( row % 2 !== 0) {
+                if ( col % 2 == 0) {
+                    isWhite = false
+                }
+                else {
+                    isWhite = true;
+                }
             }
-            rowDisplay += cellDisplay(color, 9, 5, pieceType);
-           
+            else {
+                if ( col % 2 !== 0) {
+                    isWhite = false
+                }
+                else {
+                    isWhite = true;
+                }
+            }
+            let cellStr = cellDisplay(isWhite, 9, 5, pieceType);
+            
+            // Convert cell string into an array of lines
+            //console.log(cellStr)
+            let cellLines = cellStr.split("\n");
+            //console.log(cellLines);
+            if (cellLines[cellLines.length - 1] === "") {
+                cellLines.pop();
+            }
+            rowCells.push(cellLines);
         }
-        //boardDisplay += rowDisplay + '\n'; // Add a new line after each rowconsole.log('\n');
-        process.stdout.write(rowDisplay + '\n');
+        //console.log(rowCells);
+        let count = 0;
+        //console.log(rowCells);
+        // rowCells[0].map((_, i) => 
+        //     rowCells.map(cell => {
+                
+        //         //console.log(i);
+        //         process.stdout.write(cell[i])
+        //         //console.log(i);
+        //         count += 1;
+        //         if (count == 8){
+        //              console.log();
+        //              count = 0;
+        //         }
+        //     }
+        //     )
+        // );
+
+        // Merge the rowCells horizontally without extra spaces between cells
+        let mergedRow = rowCells[0].map((_, i) => 
+            rowCells.map(cell => cell[i]).join('')
+        );
+
+        // Add to final board display
+        boardDisplay.push(...mergedRow);
+
     }
     //console.log(boardDisplay);
+    console.log(boardDisplay.join("\n"));
 }
-console.log(board);
-// console.log(displayBoard);
+
+
 displayBoard();

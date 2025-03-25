@@ -55,7 +55,7 @@ function initializeQueens(){
 
     board[8]['d'].piece = initializePiece(
         PieceType.Queen,
-        1,
+        8,
         'd',
         Color.Black
     );
@@ -82,7 +82,7 @@ function initializePiece(type: PieceType, col: number, row: string, color: Color
     const newPiece: Piece = {
         type: type,
         position: col + row,
-        color: Color.White,
+        color: color,
         hasMoved: false
     } 
     return newPiece;
