@@ -13,15 +13,18 @@ import { Piece, PieceType, Color } from "./piece";
 
 
 
-function cellTopBottomDisplay(charac: string, extra: string, w: number):string {
+function cellTopBottomDisplay(charac: string, extra: string, extraLine: boolean, w: number):string {
     let disp: string = extra;
     disp += `${charac}`.repeat(w-2);
-    disp += "\n";
+    if (extraLine) {
+        disp += "\n";
+    }        
     return disp;
 }
 
 function cellDisplay(isWhite: boolean, w:number, h:number, piece: string):string {
-    let disp: string = cellTopBottomDisplay('_', ' ', w);
+    let disp = "";
+    //let disp: string = cellTopBottomDisplay('_', ' ', w);
 
     if (isWhite){
         for (let i = 1; i < h-1; i++){
@@ -52,9 +55,15 @@ function cellDisplay(isWhite: boolean, w:number, h:number, piece: string):string
                 disp += ` ${piece} `;
                 disp += ' '.repeat(Math.floor((w / 2)-2));
                 //disp += '|';
+
             }else {
                 disp += '|';
-                disp +=  ' '.repeat(w-2);
+                if (i == 3) {
+                    disp += cellTopBottomDisplay('_', '', false, w);
+                }
+                else {
+                    disp +=  ' '.repeat(w-2);
+                }
                 //disp += '|';
             }
             // if (i !== h - 2) {
@@ -110,22 +119,7 @@ function displayBoard() {
         }
         //console.log(rowCells);
         let count = 0;
-        //console.log(rowCells);
-        // rowCells[0].map((_, i) => 
-        //     rowCells.map(cell => {
-                
-        //         //console.log(i);
-        //         process.stdout.write(cell[i])
-        //         //console.log(i);
-        //         count += 1;
-        //         if (count == 8){
-        //              console.log();
-        //              count = 0;
-        //         }
-        //     }
-        //     )
-        // );
-
+    
         // Merge the rowCells horizontally without extra spaces between cells
         let mergedRow = rowCells[0].map((_, i) => 
             rowCells.map(cell => cell[i]).join('')
