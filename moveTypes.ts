@@ -1,6 +1,6 @@
 import {Piece, PromotionPiece} from "./piece.js";
 
-interface NormalMove {
+export interface NormalMove {
     piece: Piece;
     from: string;
     to: string; 
@@ -8,7 +8,7 @@ interface NormalMove {
     //promotion?: PieceType;
 }
 
-interface CaptureMove extends NormalMove{
+export interface CaptureMove extends NormalMove{
     capturedPiece: Piece
 }
 
@@ -27,4 +27,4 @@ interface EnPassantMove extends NormalMove{
 }
 
 // Discriminatory Union of all move types
-type move = NormalMove | CaptureMove | CastlingMove | PromotionMove | EnPassantMove
+export type Move = NormalMove | CaptureMove | CastlingMove | PromotionMove | EnPassantMove

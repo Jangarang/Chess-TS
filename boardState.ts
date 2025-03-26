@@ -1,5 +1,4 @@
 import { board } from "./board";
-import { Piece, PieceType, Color } from "./piece";
 /** Displaying board */
 
 // const displayBoard: string[][] = Array.from({ length: 8 }, (_, row) =>
@@ -10,8 +9,6 @@ import { Piece, PieceType, Color } from "./piece";
 //         return cellDisplay(isWhite, 5, 3, piece); // Cell width 5, height 3
 //     })
 // );
-
-
 
 function cellTopBottomDisplay(charac: string, extra: string, extraLine: boolean, w: number):string {
     let disp: string = extra;
@@ -78,7 +75,6 @@ function cellDisplay(isWhite: boolean, w:number, h:number, piece: string):string
     return disp;
 }
 
-
 function displayBoard() {
     let boardDisplay: string[] = [];
 
@@ -132,6 +128,5 @@ function displayBoard() {
     //console.log(boardDisplay);
     console.log(boardDisplay.join("\n"));
 }
-
 
 displayBoard();

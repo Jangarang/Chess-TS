@@ -186,3 +186,4 @@ export function displayBoard() {
 }
 
 initializePieces();
+displayBoard();
