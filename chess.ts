@@ -2,7 +2,6 @@ import { processMove } from './moveProcessor';
 import { movePiece } from './pieceMovement';
 import { Move, NormalMove, CaptureMove} from './moveTypes';
 
-
 import * as readline from 'readline';
 
 const rl = readline.createInterface({
@@ -10,24 +9,7 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
-function handleInput(input: string){
-    const moveRegex = /^([a-h][1-8])\s*->\s*([a-h][1-8])$/;
-    const captureRegex = /^([a-h][1-8])\s*->\s*([a-h][1-8])\s*#\s*([a-h][1-8])$/;
-    const promotionRegex = '//';
-
-    let move: Move;
-
-    // check for normal move 
-    if (moveRegex.test(input)){
-        //const match = 
-    }
-
-
-    // check for capture move 
-
-    // check for promotion move
-
-
+function handlePlayerMove(){
 
 }
 
@@ -37,8 +19,11 @@ function startGame() {
             rl.close();
             return;
         }
-        handleInput(input);
+        processMove(input);
+        
         startGame();
     });
+
+    //const move = processMove
 
 }

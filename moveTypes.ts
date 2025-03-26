@@ -1,5 +1,13 @@
 import {Piece, PromotionPiece} from "./piece.js";
 
+export enum MoveTypes{
+    Normal,
+    Capture,
+    Castle,
+    Promotion,
+    Invalid,
+};
+
 export interface NormalMove {
     piece: Piece;
     from: string;
