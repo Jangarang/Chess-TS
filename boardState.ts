@@ -1,4 +1,4 @@
-import { board } from "./board";
+import { getBoard } from "./board";
 /** Displaying board */
 
 // const displayBoard: string[][] = Array.from({ length: 8 }, (_, row) =>
@@ -9,6 +9,8 @@ import { board } from "./board";
 //         return cellDisplay(isWhite, 5, 3, piece); // Cell width 5, height 3
 //     })
 // );
+
+let board = getBoard();
 
 function cellTopBottomDisplay(charac: string, extra: string, extraLine: boolean, w: number):string {
     let disp: string = extra;
@@ -75,7 +77,7 @@ function cellDisplay(isWhite: boolean, w:number, h:number, piece: string):string
     return disp;
 }
 
-function displayBoard() {
+export function displayBoard() {
     let boardDisplay: string[] = [];
 
     for (let row = 1; row < 9; row++) {
@@ -128,5 +130,6 @@ function displayBoard() {
     //console.log(boardDisplay);
     console.log(boardDisplay.join("\n"));
 }
+
 
 displayBoard();

@@ -1,5 +1,8 @@
-//import { processMove } from './moveProcessor.ts';
+import { processMove } from './moveProcessor';
+import { movePiece } from './pieceMovement';
 import { Move, NormalMove, CaptureMove} from './moveTypes';
+
+
 import * as readline from 'readline';
 
 const rl = readline.createInterface({

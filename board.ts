@@ -5,7 +5,25 @@ export interface Cell {
     piece: Piece| null;
 }
 
-export const board: {[key: number]: {[key: string]: Cell}} = Object.fromEntries(
+type Board = {[key: number]: {[key: string]: Cell}};
+
+// export function createBoard():Board {
+//     let board: Board = Object.fromEntries(
+//         Array.from({length: 8}, (_,row) => [
+//             row+1,
+//             Object.fromEntries(
+//                 Array.from('abcedfgh', (col) => [ //Why is the index of the character string being passed rather tha nthe character itself
+//                     col,
+//                     {position: `${col}${row}`, piece: null}
+//                 ])
+//             )
+//         ])
+//     );
+
+//     return board
+// }
+
+const board: Board = Object.fromEntries(
     Array.from({length: 8}, (_,row) => [
         row+1,
         Object.fromEntries(
@@ -16,6 +34,10 @@ export const board: {[key: number]: {[key: string]: Cell}} = Object.fromEntries(
         )
     ])
 );
+
+export function getBoard(): Board {
+    return board;
+}
 
  function initializePawns(){
     Object.entries(board[2]).map(([key,value]) => {
@@ -186,4 +208,4 @@ export function displayBoard() {
 }
 
 initializePieces();
-displayBoard();
+// displayBoard();
